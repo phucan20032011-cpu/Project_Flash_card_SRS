@@ -17,17 +17,18 @@
     <!-- Navbar điều hướng -->
     <header class="navbar">
         <a href="/flashcard/dashboard.php" class="logo">
-            🧠 FlashCard SRS
+            FlashCard SRS
         </a>
         <nav>
-            <a href="/flashcard/dashboard.php" <?= ($pageTitle === 'Dashboard') ? 'class="active"' : '' ?>>
+            <a href="/flashcard/dashboard.php" <?= ($pageTitle ?? 'Dashboard') ? 'class="active"' : '' ?>>
                 📚 Bộ từ vựng
             </a>
-            <a href="/flashcard/stats.php" <?= ($pageTitle === 'Thống kê') ? 'class="active"' : '' ?>>
+            <a href="/flashcard/stats.php" <?= ($pageTitle ?? 'Thống kê') ? 'class="active"' : '' ?>>
                 📊 Thống kê
             </a>
             <!-- Hiện tên người dùng và nút đăng xuất -->
-            <span style="color:rgba(255,255,255,0.7); font-size:0.85rem;">
+            <span
+                style="color:rgba(255,255,255,0.7); font-size:0.85rem;">
                 👤 <?= htmlspecialchars($_SESSION['full_name'] ?? $_SESSION['email'] ?? '') ?>
             </span>
             <a href="/flashcard/api/logout.php">🚪 Đăng xuất</a>
