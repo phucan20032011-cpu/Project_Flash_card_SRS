@@ -1,8 +1,5 @@
-/* =============================================
-   assets/style.css - Giao diện tối giản, Responsive
-   ============================================= */
+/* style.css - Giao diện tối giản, Responsive */
 
-/* --- Reset & Biến màu sắc --- */
 *,
 *::before,
 *::after {
@@ -12,9 +9,9 @@
 }
 
 :root {
-  --primary: #4f46e5; /* Tím indigo */
+  --primary: #4f46e5;
   --primary-dk: #3730a3;
-  --secondary: #10b981; /* Xanh lá */
+  --secondary: #10b981;
   --danger: #ef4444;
   --warning: #f59e0b;
   --info: #3b82f6;
@@ -242,9 +239,8 @@ body {
   border-left: 4px solid var(--info);
 }
 
-/* =============================================
-   TRANG LOGIN / ĐĂNG KÝ
-   ============================================= */
+/* TRANG LOGIN / ĐĂNG KÝ */
+
 .auth-wrapper {
   min-height: 100vh;
   display: flex;
@@ -307,9 +303,7 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* =============================================
-   TRANG DASHBOARD - Danh sách bộ từ vựng
-   ============================================= */
+/*    TRANG DASHBOARD - Danh sách bộ từ vựng */
 .page-header {
   display: flex;
   align-items: center;
@@ -452,9 +446,7 @@ body {
   margin-top: 0.2rem;
 }
 
-/* =============================================
-   TRANG QUẢN LÝ FLASHCARD
-   ============================================= */
+/*    TRANG QUẢN LÝ FLASHCARD */
 .flashcard-list {
   display: flex;
   flex-direction: column;
@@ -511,9 +503,7 @@ body {
   font-weight: 600;
 }
 
-/* =============================================
-   TRANG HỌC - CARD FLIP (Lật thẻ)
-   ============================================= */
+/*    TRANG HỌC - CARD FLIP (Lật thẻ) */
 .study-wrapper {
   display: flex;
   flex-direction: column;
@@ -547,7 +537,7 @@ body {
   width: 100%;
   max-width: 600px;
   height: 320px;
-  perspective: 1200px; /* Tạo chiều sâu 3D */
+  perspective: 1200px;
   cursor: pointer;
 }
 
@@ -556,7 +546,7 @@ body {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Hiệu ứng lật mượt */
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Khi có class .flipped: thẻ xoay 180 độ */
@@ -570,7 +560,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden; /* Ẩn mặt kia khi đang lật */
+  backface-visibility: hidden;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -589,7 +579,7 @@ body {
 .flip-back {
   background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
   color: white;
-  transform: rotateY(180deg); /* Mặt sau ban đầu bị úp ngược */
+  transform: rotateY(180deg);
 }
 
 .flip-front .card-label,
@@ -703,9 +693,7 @@ body {
   margin-bottom: 2rem;
 }
 
-/* =============================================
-   MODAL (hộp thoại)
-   ============================================= */
+/*    MODAL (hộp thoại) */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -772,9 +760,7 @@ body {
   }
 }
 
-/* =============================================
-   RESPONSIVE - Điện thoại
-   ============================================= */
+/*   RESPONSIVE - Điện thoại */
 @media (max-width: 640px) {
   .sets-grid {
     grid-template-columns: 1fr;

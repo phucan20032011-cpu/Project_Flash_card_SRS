@@ -1,5 +1,5 @@
 <?php
-// views/header.php - Header tái sử dụng cho mọi trang
+// header.php - Header 
 if (!isset($pageTitle)) {
     $pageTitle = 'FlashCard SRS';
 }
@@ -41,7 +41,7 @@ if (!isset($pageTitle)) {
                 <?= htmlspecialchars($_SESSION['full_name'] ?? $_SESSION['email'] ?? 'Khách') ?>
                 <?= isset($_SESSION['role']) && $_SESSION['role'] === 'admin' ? '(Admin)' : '' ?>
             </span>
-            <a href="/flashcard/api/logout.php">🚪 Đăng xuất</a>
+            <a href="/flashcard/api/logout.php">Đăng xuất</a>
         </nav>
     </header>
 

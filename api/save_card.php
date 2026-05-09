@@ -1,5 +1,5 @@
 <?php
-// api/save_card.php - Thêm mới hoặc cập nhật flashcard
+// save_card.php - Thêm mới hoặc cập nhật flashcard
 require_once __DIR__ . '/../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -40,7 +40,6 @@ if ($cardId > 0) {
     }
 
     jsonResponse(true, 'Đã cập nhật flashcard!');
-
 } else {
     // === THÊM FLASHCARD MỚI ===
 

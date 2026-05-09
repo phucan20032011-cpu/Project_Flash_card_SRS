@@ -1,12 +1,12 @@
 <?php
-// api/delete_user.php - Admin xóa người dùng
+// delete_user.php - Admin xóa người dùng
 require_once __DIR__ . '/../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     jsonResponse(false, 'Phương thức không hợp lệ');
 }
 
-requireAdmin(); // Bắt buộc là Admin mới được gọi API này
+requireAdmin(); // Admin mới được gọi API 
 
 $input  = json_decode(file_get_contents('php://input'), true);
 $targetUserId = (int)($input['user_id'] ?? 0);
@@ -17,7 +17,7 @@ if ($targetUserId <= 0) {
 
 $db = getDB();
 
-// Thực hiện xóa (Cascade sẽ tự động xóa Vocabulary_Sets và Flashcards của người này)
+// xóa Vocabulary_Sets và Flashcards
 $stmt = $db->prepare("DELETE FROM Users WHERE user_id = ? AND role = 'user'");
 $stmt->execute([$targetUserId]);
 

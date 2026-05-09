@@ -72,14 +72,14 @@ include __DIR__ . '/views/header.php';
 
 <div class="container">
     <div class="page-header">
-        <h1>📊 Thống Kê Học Tập</h1>
+        <h1>Thống Kê Học Tập</h1>
         <a href="/flashcard/dashboard.php" class="btn btn-outline">← Quay lại</a>
     </div>
 
     <!-- Tổng quan nhanh -->
     <div class="stats-row" style="margin-bottom:2rem;">
         <div class="stat-box">
-            <div class="stat-icon purple">📝</div>
+            <div class="stat-icon purple">🔄</div>
             <div class="stat-info">
                 <div class="stat-number"><?= $totalReviews ?></div>
                 <div class="stat-label">Tổng lượt ôn</div>
@@ -93,16 +93,16 @@ include __DIR__ . '/views/header.php';
             </div>
         </div>
         <div class="stat-box">
-            <div class="stat-icon green">🎯</div>
+            <div class="stat-icon green">🧠</div>
             <div class="stat-info">
                 <?php
-                    // Tính tỷ lệ nhớ (grade >= 2)
-                    $totalG = array_sum(array_column($gradeData, 'count'));
-                    $goodG  = 0;
-                    foreach ($gradeData as $g) {
-                        if ($g['response_grade'] >= 2) $goodG += $g['count'];
-                    }
-                    $pct = $totalG > 0 ? round($goodG / $totalG * 100) : 0;
+                // Tính tỷ lệ nhớ (grade >= 2)
+                $totalG = array_sum(array_column($gradeData, 'count'));
+                $goodG  = 0;
+                foreach ($gradeData as $g) {
+                    if ($g['response_grade'] >= 2) $goodG += $g['count'];
+                }
+                $pct = $totalG > 0 ? round($goodG / $totalG * 100) : 0;
                 ?>
                 <div class="stat-number"><?= $pct ?>%</div>
                 <div class="stat-label">Tỷ lệ ghi nhớ</div>
@@ -112,8 +112,8 @@ include __DIR__ . '/views/header.php';
             <div class="stat-icon blue">🏆</div>
             <div class="stat-info">
                 <?php
-                    $maxBox = 0;
-                    foreach ($boxData as $b) $maxBox = max($maxBox, $b['box_level']);
+                $maxBox = 0;
+                foreach ($boxData as $b) $maxBox = max($maxBox, $b['box_level']);
                 ?>
                 <div class="stat-number"><?= $maxBox ?></div>
                 <div class="stat-label">Hộp cao nhất đạt</div>
@@ -125,18 +125,20 @@ include __DIR__ . '/views/header.php';
 
         <!-- Biểu đồ 7 ngày -->
         <div class="card">
-            <div class="card-header"><h2>📅 Lượt học 7 ngày qua</h2></div>
+            <div class="card-header">
+                <h2>Lượt học 7 ngày qua</h2>
+            </div>
             <div class="card-body">
                 <?php
-                    // Chuẩn bị dữ liệu 7 ngày (kể cả ngày không học)
-                    $days7 = [];
-                    for ($i = 6; $i >= 0; $i--) {
-                        $days7[date('Y-m-d', strtotime("-{$i} days"))] = 0;
-                    }
-                    foreach ($weekData as $wd) {
-                        if (isset($days7[$wd['day']])) $days7[$wd['day']] = (int)$wd['count'];
-                    }
-                    $maxVal = max(array_values($days7)) ?: 1;
+                // Chuẩn bị dữ liệu 7 ngày (kể cả ngày không học)
+                $days7 = [];
+                for ($i = 6; $i >= 0; $i--) {
+                    $days7[date('Y-m-d', strtotime("-{$i} days"))] = 0;
+                }
+                foreach ($weekData as $wd) {
+                    if (isset($days7[$wd['day']])) $days7[$wd['day']] = (int)$wd['count'];
+                }
+                $maxVal = max(array_values($days7)) ?: 1;
                 ?>
                 <div style="display:flex; align-items:flex-end; gap:0.5rem; height:150px; margin-bottom:0.5rem;">
                     <?php foreach ($days7 as $day => $count): ?>
@@ -161,20 +163,22 @@ include __DIR__ . '/views/header.php';
 
         <!-- Phân bố đánh giá -->
         <div class="card">
-            <div class="card-header"><h2>🎯 Kết quả đánh giá</h2></div>
+            <div class="card-header">
+                <h2>Kết quả đánh giá</h2>
+            </div>
             <div class="card-body">
                 <?php
-                    $labels = ['😵 Quên', '😓 Khó', '🙂 Khá', '😄 Nhớ'];
-                    $colors = ['#EF4444', '#F59E0B', '#3B82F6', '#10B981'];
-                    $gradeMap = [];
-                    foreach ($gradeData as $g) $gradeMap[$g['response_grade']] = $g['count'];
-                    $total = array_sum($gradeMap) ?: 1;
+                $labels = ['Quên', 'Khó', 'Khá', 'Nhớ'];
+                $colors = ['#EF4444', '#F59E0B', '#3B82F6', '#10B981'];
+                $gradeMap = [];
+                foreach ($gradeData as $g) $gradeMap[$g['response_grade']] = $g['count'];
+                $total = array_sum($gradeMap) ?: 1;
                 ?>
                 <div style="display:flex; flex-direction:column; gap:0.75rem;">
                     <?php for ($i = 0; $i <= 3; $i++): ?>
                         <?php
-                            $cnt = $gradeMap[$i] ?? 0;
-                            $pct2 = round($cnt / $total * 100);
+                        $cnt = $gradeMap[$i] ?? 0;
+                        $pct2 = round($cnt / $total * 100);
                         ?>
                         <div>
                             <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.3rem;">
@@ -195,7 +199,7 @@ include __DIR__ . '/views/header.php';
     <!-- Phân bố hộp Leitner -->
     <div class="card" style="margin-top:1.5rem;">
         <div class="card-header">
-            <h2>📦 Phân bố theo Hộp Leitner</h2>
+            <h2>Phân bố theo Hộp Leitner</h2>
             <span style="font-size:0.82rem; color:var(--text-muted);">Hộp cao = ghi nhớ lâu hơn</span>
         </div>
         <div class="card-body">
@@ -204,11 +208,11 @@ include __DIR__ . '/views/header.php';
             <?php else: ?>
                 <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
                     <?php
-                        $boxColors = ['#EDE9FE','#DBEAFE','#D1FAE5','#FEF3C7','#FEE2E2'];
-                        $totalCards = array_sum(array_column($boxData, 'count'));
-                        foreach ($boxData as $box):
-                            $pctBox = round($box['count'] / $totalCards * 100);
-                            $color = $boxColors[($box['box_level'] - 1) % count($boxColors)];
+                    $boxColors = ['#EDE9FE', '#DBEAFE', '#D1FAE5', '#FEF3C7', '#FEE2E2'];
+                    $totalCards = array_sum(array_column($boxData, 'count'));
+                    foreach ($boxData as $box):
+                        $pctBox = round($box['count'] / $totalCards * 100);
+                        $color = $boxColors[($box['box_level'] - 1) % count($boxColors)];
                     ?>
                         <div style="background:<?= $color ?>; border-radius:10px; padding:1rem 1.5rem; text-align:center; min-width:100px; flex:1;">
                             <div style="font-size:1.5rem; font-weight:800; color:var(--primary);">
@@ -220,7 +224,7 @@ include __DIR__ . '/views/header.php';
                     <?php endforeach; ?>
                 </div>
                 <p style="margin-top:1rem; font-size:0.82rem; color:var(--text-muted);">
-                    💡 Thẻ ở hộp cao hơn sẽ được ôn ít thường xuyên hơn vì bạn đã nhớ tốt hơn.
+                    Thẻ ở hộp cao hơn sẽ được ôn ít thường xuyên hơn vì bạn đã nhớ tốt hơn.
                 </p>
             <?php endif; ?>
         </div>

@@ -5,7 +5,7 @@ requireAdmin();
 
 $db = getDB();
 
-// Lấy danh sách user (trừ các admin khác ra để tránh tự xóa nhau)
+// Lấy danh sách user 
 $stmt = $db->query("
     SELECT u.user_id, u.email, u.full_name, u.created_at,
            COUNT(DISTINCT vs.set_id) as total_sets,
@@ -25,7 +25,7 @@ include __DIR__ . '/views/header.php';
 
 <div class="container">
     <div class="page-header">
-        <h1>👥 Quản Lý Người Dùng</h1>
+        <h1>Quản Lý Người Dùng</h1>
     </div>
 
     <div class="card">
@@ -57,7 +57,7 @@ include __DIR__ . '/views/header.php';
                                 <td style="padding: 1rem;"><span class="badge badge-success"><?= $u['total_cards'] ?> thẻ</span></td>
                                 <td style="padding: 1rem; color:var(--text-muted); font-size:0.9rem;"><?= date('d/m/Y', strtotime($u['created_at'])) ?></td>
                                 <td style="padding: 1rem; text-align: right;">
-                                    <button class="btn btn-danger btn-sm" onclick="deleteUser(<?= $u['user_id'] ?>)">🗑️ Xóa</button>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteUser(<?= $u['user_id'] ?>)">Xóa</button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

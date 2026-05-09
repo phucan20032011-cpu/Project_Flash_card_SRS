@@ -1,5 +1,5 @@
 <?php
-// api/save_set.php - Thêm mới hoặc cập nhật bộ từ vựng
+// save_set.php - Thêm mới hoặc cập nhật bộ từ vựng
 require_once __DIR__ . '/../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -23,7 +23,7 @@ $db = getDB();
 
 if ($setId > 0) {
     // === CẬP NHẬT bộ từ vựng hiện có ===
-    // Kiểm tra bộ từ này có thuộc về user hiện tại không (bảo mật)
+    // Kiểm tra bộ từ này có thuộc về user
     $stmt = $db->prepare("UPDATE Vocabulary_Sets SET title = ?, description = ? WHERE set_id = ? AND user_id = ?");
     $stmt->execute([$title, $desc, $setId, $userId]);
 
@@ -32,7 +32,6 @@ if ($setId > 0) {
     }
 
     jsonResponse(true, 'Đã cập nhật bộ từ vựng!', ['set_id' => $setId]);
-
 } else {
     // === THÊM MỚI bộ từ vựng ===
     $stmt = $db->prepare("INSERT INTO Vocabulary_Sets (user_id, title, description) VALUES (?, ?, ?)");

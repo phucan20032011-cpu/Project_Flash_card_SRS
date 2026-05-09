@@ -1,5 +1,5 @@
 <?php
-// api/delete_set.php - Xóa bộ từ vựng (cascade xóa cả thẻ)
+// delete_set.php - Xóa bộ từ vựng 
 require_once __DIR__ . '/../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -18,7 +18,7 @@ if ($setId <= 0) {
 
 $db = getDB();
 
-// Xóa bộ từ vựng - ON DELETE CASCADE trong DB sẽ tự xóa các thẻ liên quan
+// Xóa bộ từ vựng - ON DELETE CASCADE trong DB sẽ tự xóa các thẻ 
 $stmt = $db->prepare("DELETE FROM Vocabulary_Sets WHERE set_id = ? AND user_id = ?");
 $stmt->execute([$setId, $userId]);
 

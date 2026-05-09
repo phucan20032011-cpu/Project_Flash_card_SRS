@@ -1,5 +1,5 @@
 <?php
-// api/delete_card.php - Xóa một flashcard
+// delete_card.php - Xóa một flashcard
 require_once __DIR__ . '/../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -18,7 +18,7 @@ if ($cardId <= 0) {
 
 $db = getDB();
 
-// Xóa thẻ - chỉ xóa nếu thuộc bộ từ của user
+// Xóa thẻ
 $stmt = $db->prepare("
     DELETE f FROM Flashcards f
     JOIN Vocabulary_Sets vs ON vs.set_id = f.set_id

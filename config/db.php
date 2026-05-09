@@ -4,28 +4,27 @@
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'flashcard_srs');
-define('DB_USER', 'root');       // Tài khoản XAMPP mặc định
-define('DB_PASS', '');           // Mật khẩu XAMPP mặc định (để trống)
+define('DB_USER', 'root');       // Tài khoản XAMPP 
+define('DB_PASS', '');           // Mật khẩu XAMPP 
 define('DB_CHARSET', 'utf8mb4');
 
-// Hàm tạo kết nối PDO - gọi hàm này ở mọi file cần truy vấn DB
+// Hàm tạo kết nối PDO 
 function getDB()
 {
-    static $pdo = null; // Chỉ tạo kết nối 1 lần (Singleton pattern đơn giản)
-
+    static $pdo = null; // tạo kết nối 1 lần
     if ($pdo === null) {
         // $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
         $dsn = "mysql:host=" . DB_HOST . ";port=3307;dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
         $options = [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // Báo lỗi bằng exception
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // Trả về mảng kết hợp
-            PDO::ATTR_EMULATE_PREPARES   => false,                  // Dùng prepared statement thật
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES   => false,
         ];
 
         try {
             $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
         } catch (PDOException $e) {
-            // Hiển thị lỗi thân thiện thay vì lộ thông tin kỹ thuật
+            // Hiển thị lỗi 
             die(json_encode(['success' => false, 'message' => 'Không thể kết nối cơ sở dữ liệu!']));
         }
     }
@@ -33,18 +32,18 @@ function getDB()
     return $pdo;
 }
 
-// Bắt đầu session nếu chưa có
+// session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Hàm kiểm tra người dùng đã đăng nhập chưa
+//kiểm tra đã đăng nhập
 function isLoggedIn()
 {
     return isset($_SESSION['user_id']);
 }
 
-// Hàm bắt buộc đăng nhập - dùng ở các trang cần xác thực
+// bắt buộc đăng nhập - dùng ở các trang cần xác thực
 function requireLogin()
 {
     if (!isLoggedIn()) {
@@ -53,7 +52,7 @@ function requireLogin()
     }
 }
 
-// Hàm trả về JSON - dùng cho các file API
+// trả về JSON - dùng cho các file API
 function jsonResponse($success, $message, $data = [])
 {
     header('Content-Type: application/json; charset=utf-8');
@@ -63,12 +62,12 @@ function jsonResponse($success, $message, $data = [])
 
 
 
-// Hàm bắt buộc quyền Admin - dùng cho các trang quản trị
+// quyền Admin - dùng cho trang quản trị
 function requireAdmin()
 {
-    requireLogin(); // Phải đăng nhập trước
+    requireLogin();
     if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-        // Nếu không phải admin, đá về trang dashboard của user
+        // Nếu không phải admin, về trang dashboard
         header('Location: /flashcard/dashboard.php');
         exit;
     }

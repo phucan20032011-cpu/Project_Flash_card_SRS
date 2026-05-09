@@ -1,5 +1,5 @@
 <?php
-// api/register.php - Xử lý đăng ký tài khoản mới
+// register.php - Xử lý đăng ký tài khoản mới
 require_once __DIR__ . '/../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -34,7 +34,7 @@ if ($stmt->fetch()) {
     jsonResponse(false, 'Email này đã được đăng ký!');
 }
 
-// Mã hóa mật khẩu bằng bcrypt (an toàn)
+// Mã hóa mật khẩu bằng bcrypt 
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 // Thêm user mới vào database
@@ -43,7 +43,7 @@ $stmt->execute([$email, $full_name, $password_hash]);
 
 $userId = $db->lastInsertId();
 
-// Tự động đăng nhập sau khi đăng ký
+// Tự động đăng nhập
 $_SESSION['user_id']   = $userId;
 $_SESSION['email']     = $email;
 $_SESSION['full_name'] = $full_name;

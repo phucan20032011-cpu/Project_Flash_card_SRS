@@ -1,8 +1,8 @@
 <?php
-// api/login.php - Xử lý đăng nhập
+// login.php - Xử lý đăng nhập
 require_once __DIR__ . '/../config/db.php';
 
-// Chỉ chấp nhận POST request
+// POST request
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     jsonResponse(false, 'Phương thức không hợp lệ');
 }
@@ -25,7 +25,7 @@ $stmt = $db->prepare("SELECT user_id, email, full_name, password_hash, role FROM
 $stmt->execute([$email]);
 $user = $stmt->fetch();
 
-// Kiểm tra user tồn tại và mật khẩu đúng
+// Kiểm tra user và mật
 if (!$user || !password_verify($password, $user['password_hash'])) {
     jsonResponse(false, 'Email hoặc mật khẩu không đúng!');
 }

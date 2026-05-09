@@ -70,7 +70,7 @@ include __DIR__ . '/views/header.php';
             </div>
         </div>
         <div class="stat-box">
-            <div class="stat-icon orange">⏰</div>
+            <div class="stat-icon orange">⏳</div>
             <div class="stat-info">
                 <div class="stat-number"><?= $dueCount ?></div>
                 <div class="stat-label">Thẻ cần ôn hôm nay</div>
@@ -87,9 +87,9 @@ include __DIR__ . '/views/header.php';
 
     <!-- Header trang + nút tạo mới -->
     <div class="page-header">
-        <h1>📚 Bộ Từ Vựng Của Tôi</h1>
+        <h1>Bộ Từ Vựng Của Tôi</h1>
         <button class="btn btn-primary" onclick="openAddSet()">
-            ➕ Tạo bộ từ mới
+            Tạo bộ từ mới
         </button>
     </div>
 
@@ -100,7 +100,7 @@ include __DIR__ . '/views/header.php';
             <h3>Chưa có bộ từ vựng nào</h3>
             <p>Bắt đầu bằng cách tạo bộ từ vựng đầu tiên của bạn!</p>
             <button class="btn btn-primary" style="margin-top:1rem" onclick="openAddSet()">
-                ➕ Tạo ngay
+                Tạo ngay
             </button>
         </div>
     <?php else: ?>
@@ -109,29 +109,29 @@ include __DIR__ . '/views/header.php';
                 <div class="set-card" id="set-card-<?= $set['set_id'] ?>">
                     <!-- Click vào tên/mô tả để vào quản lý thẻ -->
                     <a href="/flashcard/cards.php?set_id=<?= $set['set_id'] ?>"
-                       style="text-decoration:none; color:inherit; flex-grow:1;">
+                        style="text-decoration:none; color:inherit; flex-grow:1;">
                         <h3><?= htmlspecialchars($set['title']) ?></h3>
                         <p><?= htmlspecialchars($set['description'] ?: 'Chưa có mô tả') ?></p>
                     </a>
 
                     <div class="set-meta">
-                        <span class="badge badge-primary">🃏 <?= $set['card_count'] ?> thẻ</span>
+                        <span class="badge badge-primary"><?= $set['card_count'] ?> thẻ</span>
                         <div class="set-actions" onclick="event.stopPropagation()">
                             <!-- Nút học ngay -->
                             <?php if ($set['card_count'] > 0): ?>
                                 <a href="/flashcard/study.php?set_id=<?= $set['set_id'] ?>"
-                                   class="btn btn-success btn-sm">▶ Học</a>
+                                    class="btn btn-success btn-sm">▶ Học</a>
                             <?php endif; ?>
                             <!-- Nút sửa -->
                             <button class="btn btn-outline btn-sm"
                                 onclick="openEditSet(<?= htmlspecialchars(json_encode([
-                                    'set_id'      => $set['set_id'],
-                                    'title'       => $set['title'],
-                                    'description' => $set['description']
-                                ])) ?>)">✏️</button>
+                                                            'set_id'      => $set['set_id'],
+                                                            'title'       => $set['title'],
+                                                            'description' => $set['description']
+                                                        ])) ?>)">✏️</button>
                             <!-- Nút xóa -->
                             <button class="btn btn-danger btn-sm"
-                                onclick="deleteSet(<?= $set['set_id'] ?>)">🗑️</button>
+                                onclick="deleteSet(<?= $set['set_id'] ?>)">Xóa</button>
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@ include __DIR__ . '/views/header.php';
 <!-- Modal thêm/sửa bộ từ vựng -->
 <div id="modal-set" class="modal-overlay">
     <div class="modal-box">
-        <h3 id="modal-title-set">➕ Tạo bộ từ vựng mới</h3>
+        <h3 id="modal-title-set">Tạo bộ từ vựng mới</h3>
         <form id="form-set" onsubmit="return false;">
             <input type="hidden" id="edit-set-id" name="set_id" value="">
             <div class="form-error alert alert-error" style="display:none;"></div>
@@ -151,18 +151,18 @@ include __DIR__ . '/views/header.php';
             <div class="form-group">
                 <label>Tên bộ từ vựng *</label>
                 <input type="text" id="edit-set-title" name="title"
-                       placeholder="VD: Tiếng Anh giao tiếp" required>
+                    placeholder="VD: Tiếng Anh giao tiếp" required>
             </div>
             <div class="form-group">
                 <label>Mô tả</label>
                 <textarea id="edit-set-desc" name="description"
-                          placeholder="Mô tả ngắn về bộ từ này..."></textarea>
+                    placeholder="Mô tả ngắn về bộ từ này..."></textarea>
             </div>
             <div class="modal-actions">
                 <button type="button" class="btn btn-outline" onclick="closeModal('modal-set')">Hủy</button>
                 <button type="button" class="btn btn-primary"
                     onclick="submitSetForm('form-set', '/flashcard/api/save_set.php')">
-                    💾 Lưu
+                    Lưu
                 </button>
             </div>
         </form>
@@ -172,14 +172,14 @@ include __DIR__ . '/views/header.php';
 <?php include __DIR__ . '/views/footer.php'; ?>
 
 <script>
-// Mở modal thêm mới (xóa dữ liệu cũ)
-function openAddSet() {
-    document.getElementById('edit-set-id').value    = '';
-    document.getElementById('edit-set-title').value = '';
-    document.getElementById('edit-set-desc').value  = '';
-    document.getElementById('modal-title-set').textContent = '➕ Tạo bộ từ vựng mới';
-    // Ẩn thông báo lỗi cũ
-    document.querySelector('#form-set .form-error').style.display = 'none';
-    openModal('modal-set');
-}
+    // Mở modal thêm mới (xóa dữ liệu cũ)
+    function openAddSet() {
+        document.getElementById('edit-set-id').value = '';
+        document.getElementById('edit-set-title').value = '';
+        document.getElementById('edit-set-desc').value = '';
+        document.getElementById('modal-title-set').textContent = 'Tạo bộ từ vựng mới';
+        // Ẩn thông báo lỗi cũ
+        document.querySelector('#form-set .form-error').style.display = 'none';
+        openModal('modal-set');
+    }
 </script>

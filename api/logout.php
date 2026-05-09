@@ -1,10 +1,10 @@
 <?php
-// api/logout.php - Xử lý đăng xuất
+// logout.php - Xử lý đăng xuất
 require_once __DIR__ . '/../config/db.php';
 
-// Xóa toàn bộ session
+// Xóa session
 session_destroy();
 
-// Chuyển về trang đăng nhập
+// về trang đăng nhập
 header('Location: /flashcard/index.php');
 exit;

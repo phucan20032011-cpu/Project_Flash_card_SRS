@@ -1,5 +1,5 @@
 <?php
-// api/flag_card.php - Đánh dấu / bỏ đánh dấu thẻ cần xem lại
+// flag_card.php - Đánh dấu / bỏ đánh dấu thẻ cần xem lại
 require_once __DIR__ . '/../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

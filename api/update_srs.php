@@ -1,6 +1,5 @@
 <?php
-// api/update_srs.php - Cập nhật thuật toán SRS sau khi user đánh giá thẻ
-// Đây là file QUAN TRỌNG NHẤT của hệ thống
+// update_srs.php - Cập nhật thuật toán SRS sau khi user đánh giá thẻ
 require_once __DIR__ . '/../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -28,13 +27,11 @@ $srs  = $stmt->fetch();
 // Nếu chưa có bản ghi SRS, tạo mặc định
 $currentBox = $srs ? (int)$srs['box_level'] : 1;
 
-// =============================================
 // THUẬT TOÁN LEITNER ĐƠN GIẢN
 // - Quên (grade=0): về Hộp 1, ôn lại ngày mai
 // - Khó  (grade=1): Hộp + 1, ôn sau 2^(box-1) ngày
 // - Khá  (grade=2): Hộp + 1, ôn sau 2^(box-1) ngày
 // - Nhớ  (grade=3): Hộp + 1, ôn sau 2^(box-1) ngày (khoảng cách dài hơn)
-// =============================================
 
 if ($grade === 0) {
     // Quên: reset về hộp 1, ôn lại ngày mai
@@ -82,7 +79,7 @@ $stmtHist = $db->prepare("
 ");
 $stmtHist->execute([$userId, $cardId, $grade]);
 
-// Tạo thông báo thân thiện cho người dùng
+// thông báo 
 $gradeLabels = ['Quên', 'Khó', 'Khá', 'Nhớ tốt'];
 $msg = sprintf(
     '%s → Hộp %d | Ôn lại sau %d ngày (%s)',

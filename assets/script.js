@@ -68,9 +68,7 @@ async function fetchAPI(url, data) {
   }
 }
 
-// =============================================
 // LOGIC TRANG HỌC (study.php)
-// =============================================
 let studyCards = []; // Mảng thẻ cần học hôm nay
 let currentIndex = 0; // Vị trí thẻ hiện tại
 let isFlipped = false; // Trạng thái lật thẻ
@@ -113,10 +111,10 @@ function flipCard() {
   const flipCardEl = document.getElementById("flip-card");
 
   if (!isFlipped) {
-    // Lật ra mặt sau - dùng CSS transform
+    // Lật ra mặt sau
     flipCardEl.classList.add("flipped");
     isFlipped = true;
-    // Bật nút đánh giá sau khi đã xem đáp án
+    // nút đánh giá sau khi đã xem đáp án
     setRatingDisabled(false);
   } else {
     // Lật lại mặt trước
@@ -159,9 +157,9 @@ async function rateCard(grade) {
 
   if (result.success) {
     // Cho biết lịch ôn tiếp theo
-    showToast(`✅ ${result.message}`);
+    showToast(`${result.message}`);
   } else {
-    showToast("❌ " + (result.message || "Có lỗi xảy ra"));
+    showToast(result.message || "Có lỗi xảy ra");
   }
 
   // Chuyển sang thẻ tiếp theo
@@ -175,9 +173,7 @@ function showDoneScreen() {
   document.getElementById("study-done").style.display = "flex";
 }
 
-// =============================================
 // FORM THÊM / SỬA BỘ TỪ VỰNG (dashboard.php)
-// =============================================
 async function submitSetForm(formId, url, onSuccess) {
   const form = document.getElementById(formId);
   if (!form) return;
@@ -188,7 +184,7 @@ async function submitSetForm(formId, url, onSuccess) {
   const result = await fetchAPI(url, data);
 
   if (result.success) {
-    showToast("✅ " + result.message);
+    showToast(result.message);
     closeModal("modal-set");
     // Reload để cập nhật danh sách
     setTimeout(() => location.reload(), 800);
@@ -199,9 +195,7 @@ async function submitSetForm(formId, url, onSuccess) {
   }
 }
 
-// =============================================
 // FORM THÊM / SỬA FLASHCARD (cards.php)
-// =============================================
 async function submitCardForm(formId, url) {
   const form = document.getElementById(formId);
   if (!form) return;
@@ -212,7 +206,7 @@ async function submitCardForm(formId, url) {
   const result = await fetchAPI(url, data);
 
   if (result.success) {
-    showToast("✅ " + result.message);
+    showToast(result.message);
     closeModal("modal-card");
     setTimeout(() => location.reload(), 800);
   } else {
@@ -228,10 +222,10 @@ async function deleteCard(cardId) {
       card_id: cardId,
     });
     if (result.success) {
-      showToast("🗑️ Đã xóa thẻ");
+      showToast("Đã xóa thẻ");
       document.getElementById("card-row-" + cardId)?.remove();
     } else {
-      showToast("❌ " + result.message);
+      showToast(result.message);
     }
   });
 }
@@ -243,10 +237,10 @@ async function deleteSet(setId) {
       set_id: setId,
     });
     if (result.success) {
-      showToast("🗑️ Đã xóa bộ từ vựng");
+      showToast("Đã xóa bộ từ vựng");
       document.getElementById("set-card-" + setId)?.remove();
     } else {
-      showToast("❌ " + result.message);
+      showToast(result.message);
     }
   });
 }
@@ -260,7 +254,7 @@ async function toggleFlag(cardId, btn) {
     // Cập nhật giao diện ngay lập tức
     const row = document.getElementById("card-row-" + cardId);
     if (result.is_flagged) {
-      btn.textContent = "🚩";
+      btn.textContent = "";
       btn.title = "Bỏ đánh dấu";
       row?.classList.add("flagged");
     } else {
@@ -291,7 +285,6 @@ function openEditSet(set) {
 }
 
 // LOGIC DÀNH CHO ADMIN
-
 async function deleteUser(userId) {
   confirmDelete(
     "CẢNH BÁO: Bạn có chắc chắn muốn xóa người dùng này? Toàn bộ bộ từ vựng và thẻ học của họ sẽ bị xóa vĩnh viễn!",
@@ -300,11 +293,11 @@ async function deleteUser(userId) {
         user_id: userId,
       });
       if (result.success) {
-        showToast("🗑️ " + result.message);
+        showToast(result.message);
         // Ẩn dòng chứa user vừa bị xóa khỏi bảng
         document.getElementById("user-row-" + userId)?.remove();
       } else {
-        showToast("❌ " + result.message);
+        showToast(result.message);
       }
     },
   );
