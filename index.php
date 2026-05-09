@@ -53,9 +53,9 @@ $error = '';
                 <button class="btn btn-primary" style="width:100%;" onclick="doLogin()">
                     Đăng nhập
                 </button>
-                <p style="text-align:center; margin-top:1rem; font-size:0.82rem; color:var(--text-muted);">
+                <!-- <p style="text-align:center; margin-top:1rem; font-size:0.82rem; color:var(--text-muted);">
                     Demo: <strong>student@demo.com</strong> / <strong>password</strong>
-                </p>
+                </p> -->
             </div>
 
             <!-- === FORM ĐĂNG KÝ === -->
