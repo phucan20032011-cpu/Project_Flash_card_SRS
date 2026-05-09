@@ -1,8 +1,6 @@
 <?php
-// =============================================
 // config/db.php - Kết nối cơ sở dữ liệu
 // Sử dụng PDO để kết nối an toàn
-// =============================================
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'flashcard_srs');
@@ -61,4 +59,17 @@ function jsonResponse($success, $message, $data = [])
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode(array_merge(['success' => $success, 'message' => $message], $data));
     exit;
+}
+
+
+
+// Hàm bắt buộc quyền Admin - dùng cho các trang quản trị
+function requireAdmin()
+{
+    requireLogin(); // Phải đăng nhập trước
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+        // Nếu không phải admin, đá về trang dashboard của user
+        header('Location: /flashcard/dashboard.php');
+        exit;
+    }
 }
