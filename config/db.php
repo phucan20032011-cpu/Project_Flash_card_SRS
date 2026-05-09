@@ -1,14 +1,14 @@
 <?php
 // config/db.php - Kết nối cơ sở dữ liệu
-// Sử dụng PDO để kết nối an toàn
+
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'flashcard_srs');
-define('DB_USER', 'root');       // Tài khoản XAMPP 
-define('DB_PASS', '');           // Mật khẩu XAMPP 
+define('DB_USER', 'root');
+define('DB_PASS', '');
 define('DB_CHARSET', 'utf8mb4');
 
-// Hàm tạo kết nối PDO 
+// Hàm tạo kết nối 
 function getDB()
 {
     static $pdo = null; // tạo kết nối 1 lần
