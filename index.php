@@ -56,6 +56,9 @@ $error = '';
                 <!-- <p style="text-align:center; margin-top:1rem; font-size:0.82rem; color:var(--text-muted);">
                     Demo: <strong>student@demo.com</strong> / <strong>password</strong>
                 </p> -->
+                <p style="text-align:right; margin-top:0.75rem; font-size:0.85rem;">
+                    <a href="/flashcard/forgot_password.php" style="color:var(--primary);">Quên mật khẩu?</a>
+                </p>
             </div>
 
             <!-- === FORM ĐĂNG KÝ === -->
