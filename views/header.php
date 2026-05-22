@@ -146,7 +146,9 @@ if (!isset($pageTitle)) {
             display: block;
             padding: 0.75rem 1rem;
             font-size: 0.88rem;
-            color: var(--text);
+            /* color: var(--text); */
+            color: #000 !important;
+            /* color: black; */
             text-decoration: none;
             transition: background 0.15s;
         }
