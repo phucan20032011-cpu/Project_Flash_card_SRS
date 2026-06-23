@@ -23,7 +23,7 @@ if ($user['role'] === 'user') {
     $totalSets = $stmt->fetchColumn();
 
     $stmt = $db->prepare("
-        SELECT COUNT(*) FROM Flashcards f
+        SELECT COUNT(*) FR  OM Flashcards f
         JOIN Vocabulary_Sets vs ON vs.set_id = f.set_id
         WHERE vs.user_id = ?
     ");
