@@ -1,6 +1,6 @@
 <?php
 // profile.php - Xem thông tin cá nhân (chỉ xem, không sửa)
-// Đặt ở thư mục gốc: flashcard/
+
 require_once __DIR__ . '/config/db.php';
 requireLogin();
 
@@ -23,7 +23,7 @@ if ($user['role'] === 'user') {
     $totalSets = $stmt->fetchColumn();
 
     $stmt = $db->prepare("
-        SELECT COUNT(*) FR  OM Flashcards f
+        SELECT COUNT(*) FROM Flashcards f
         JOIN Vocabulary_Sets vs ON vs.set_id = f.set_id
         WHERE vs.user_id = ?
     ");

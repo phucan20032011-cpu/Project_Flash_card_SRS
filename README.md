@@ -11,33 +11,39 @@
 
 ```
 flashcard/
+├── api/
+│   ├── change_password.php
+│   ├── delete_card.php
+│   ├── delete_set.php
+│   ├── delete_user.php
+│   ├── flag_card.php
+│   ├── login.php
+│   ├── logout.php
+│   ├── register.php
+│   ├── reset_password.php
+│   ├── save_card.php
+│   ├── save_set.php
+│   ├── update_srs.php
+│   └── verify_identity.php
+├── assets/
+│   ├── script.js
+│   └── style.css
 ├── config/
 │   └── db.php
-├── assets/
-│   ├── style.css
-│   └── script.js
-├── api/
-│   ├── login.php
-│   ├── register.php
-│   ├── logout.php
-│   ├── save_set.php
-│   ├── delete_set.php
-│   ├── save_card.php
-│   ├── delete_card.php
-│   ├── flag_card.php
-│   ├── update_srs.php
-│   └── delete_user.php
 ├── views/
-│   ├── header.php
-│   └── footer.php
-├── index.php
-├── dashboard.php
-├── cards.php
-├── study.php
-├── stats.php
+│   ├── footer.php
+│   └── header.php
 ├── admin_dashboard.php
 ├── admin_users.php
-└── database.sql
+├── cards.php
+├── dashboard.php
+├── database.sql
+├── forgot_password.php
+├── index.php
+├── profile.php
+├── README.md
+├── stats.php
+└── study.php
 ```
 
 ---
